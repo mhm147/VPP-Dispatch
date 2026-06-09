@@ -23,3 +23,17 @@ def crps (actual:float, quantilePredictions: dict) -> float:
 
     #CRPS = average pinball loss across all quantiles
     return float (np.mean(pinball))
+
+def meanCRPS(actuals: list, quantileForecasts:list) -> float:
+    """
+    Computes mean CRPS over multiple observations (hours)
+    actuals: list of real observed values (actual cost)
+    quantileForecasts: list of dicts, one per observation
+    Returns average CRPS
+    """
+
+    #Calculating CRPS for each observation and stores it in a list: (zip to pair both lists)
+    scores = [crps(actual, forecast) for actual, forecast in zip (actuals, quantileForecasts)]
+
+    #Returns the average across all readings
+    return float (np.mean(scores))
