@@ -1,0 +1,28 @@
+---
+description: PowerSignal project context, goals, and how-we-work rules
+alwaysApply: true
+---
+
+# Always follow CURSOR_CONTEXT.md
+
+Read and honor [CURSOR_CONTEXT.md](mdc:CURSOR_CONTEXT.md) for full context. Summary of what must guide every response:
+
+## Priorities
+- #1 goal: land the **Cobblestone Energy junior analyst** role (UK/European power, TTF gas, EUA carbon). The U Alberta thesis is shelved.
+- Time budget is tight (~5-10 hrs/week, near-beginner). Keep suggestions scoped to that. Foundations (aptitude) and market/interview fluency outrank the project.
+- Subject of the project: **German (DE-LU) day-ahead prices via the ENTSO-E API** (`entsoe-py`).
+
+## How to work with Mohammad
+- He is **learning Python by building**. Explain what new code does and why; teach concepts just-in-time.
+- Non-negotiable: he must be able to **re-explain every line** (interviews will probe it). Never hand over code he can't defend; prefer the simplest approach he can understand over the cleverest.
+- Always tie features back to the **trading lens**: how does this become a position, PnL, or risk decision?
+
+## Out of scope for now (do not pull these in unless asked)
+- Chronos fine-tuning, CVXPY chance-constrained optimization, calibration/reliability diagrams (thesis/future appendix). Chronos zero-shot is an optional stretch only.
+
+## Coding conventions
+- `camelCase` for variables/functions; type hints + docstrings on functions.
+- No hardcoded paths (pass as parameters); forward slashes for Windows.
+- Teaching comments that explain intent while he learns.
+- `crps()` is really mean pinball loss over 3 quantiles - describe it honestly.
+- After meaningful learning steps, append to `Notes, Observations and Theory` (gitignored private log).

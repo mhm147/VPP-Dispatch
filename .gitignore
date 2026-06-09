@@ -1,0 +1,13 @@
+# Secrets and local config
+.env
+
+# Private learning docs (not for public repo)
+CURSOR_CONTEXT.md
+Notes, Observations and Theory
+
+# Downloaded market data (re-pull from ENTSO-E locally)
+data/raw/
+
+# Python cache
+__pycache__/
+*.pyc
