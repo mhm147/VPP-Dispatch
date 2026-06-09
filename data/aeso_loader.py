@@ -34,3 +34,22 @@ def load_raw(path:str) -> pd.DataFrame:
     print(f"Shape after cleaning: {df.shape}")
     print(f"Loaded {len(df):,} hours | {df.index.min().date()} → {df.index.max().date()}")
     return df
+
+def trainValTestSplit(df: pd.DataFrame):
+
+    """
+    Splits data, past to future,
+    Training set: 2020-2022.
+    Validation set: 2023.
+    Test set: 2024-2025
+    """
+
+    #Splitting:
+    train = df.loc["2020-01-01":"2022-12-31"]
+    val = df.loc["2023-01-01":"2023-12-31"]
+    test = df.loc["2024-01-01":]
+
+    print(f"Train: {len(train):,} hours{train.index[0].date()} -> {train.index[-1].date()}")
+    print(f"Validation : {len(val):,} hours {val.index[0].date()} -> {val.index[-1].date()}")
+    print(f"Testing: {len(test):,} hours {test.index[0].date()} -> {test.index[-1].date()}")
+    return train, val, test

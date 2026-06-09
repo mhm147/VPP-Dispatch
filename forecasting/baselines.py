@@ -31,3 +31,29 @@ def seasonalNaiveForecast(series: pd.Series, horizon: int = 24) -> pd.Series:
     forecastValues = [series.iloc[-(seasonalLag - i)] for i in range(horizon)]
     
     return pd.Series(forecastValues, index=futureIndex)
+
+def historicalAverageForecast(trainSeries: pd.Series, forecastIndex: pd.DatetimeIndex) -> pd.Series:
+    """
+    Predicts each future hour using the historical average for that 
+    specific hour + month + weekday combination from the training data.
+    Much more stable than seasonal naive — averages many reference points
+    instead of relying on one specific day.
+    """
+    # Build a lookup table from training data
+    # Group by month, dayofweek, and hour — compute mean price for each combination
+    lookup = (
+        trainSeries.groupby([
+            trainSeries.index.month,
+            trainSeries.index.dayofweek,
+            trainSeries.index.hour
+        ]).mean()
+    )
+    lookup.index.names = ["month", "dayofweek", "hour"]
+
+    # For each timestamp in the forecast horizon, look up its historical average
+    forecastValues = []
+    for timestamp in forecastIndex:
+        key = (timestamp.month, timestamp.dayofweek, timestamp.hour)
+        forecastValues.append(lookup[key])
+
+    return pd.Series(forecastValues, index=forecastIndex)
